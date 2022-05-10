@@ -3,6 +3,9 @@
 ## Description
 Calculates the amount of time before or after sunlight for the current date either from your current location or when provided latitude and longitude of the desired location.
 
+## Demonstration
+You can see RRSC in action [here](https://menthol.cloud/rrsc)!
+
 ### `npm start`
 
 Runs the app in the development mode.\
