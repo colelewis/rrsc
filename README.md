@@ -1,7 +1,7 @@
 # RRSC
 
 ## Description
-Calculates the amount of time before or after sunlight for the current date either from your current location or when provided latitude and longitude of the desired location.
+Calculates the amount of time before or after sunset for the current date either from your current location or when provided latitude and longitude of the desired location.
 
 ## Demonstration
 You can see RRSC in action [here](https://menthol.cloud/rrsc)!
