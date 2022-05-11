@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
 import SunCalc from 'suncalc';
 import useGeolocation from 'react-hook-geolocation';
-
+import './bootstrap.min.css';
 
 export default function Droplet() {
 
@@ -44,22 +43,23 @@ export default function Droplet() {
     };
   };
 
-  const useCurrentLocation = () => {
+  const useCurrentLocation = () => { // second half of page
     const geolocation = useGeolocation();
     var times = SunCalc.getTimes(new Date(), geolocation.latitude, geolocation.longitude);
     var timeDifference = times.sunset.getTime() - UtilDate().timeInMs
     return (
-      <View style={styling.subcontainer}>
-        <Text style={styling.subtext}>The Sun will set at {times.sunset.toUTCString()} for the given location!{"\n"}</Text>
-        <Text style={styling.subtext}>This will occur at {times.sunset.toLocaleTimeString()} in your time!{"\n"}</Text>
-        <Text style={styling.subtext}>
+      <div class="col-lg rounded-2 bg-secondary text-white p-4">
+        <h4>At your location:</h4>
+        <p class="lead">The Sun will set at {times.sunset.toUTCString()}!{"\n"}</p>
+        <p class="lead">This will occur at {times.sunset.toLocaleTimeString()}!{"\n"}</p>
+        <p class="lead">
           {formatSunsetTimeDifference(timeDifference)}
-        </Text>
-      </View>
+        </p>
+      </div>
     );
   };
 
-  function LocationForm() {
+  function LocationForm() { // first half of page
     const [latitude, setLatitude] = useState(''); //initial value
     const [longitude, setLongitude] = useState('');
 
@@ -68,74 +68,43 @@ export default function Droplet() {
 
     if (latitude === '' || longitude === '') {
       return (
-        <div>
-          <TextInput style={styling.input} placeholder="latitude" onChange={e => setLatitude(e.target.value)} />
-          <TextInput style={styling.input} placeholder="longitude" onChange={e => setLongitude(e.target.value)} />
+        <div class="container-fluid bg-light text-secondary col-lg mb-4">
+          <input class="form-control form-control-sm" type="text" placeholder="latitude" onChange={e => setLatitude(e.target.value)} />
+          <input class="form-control form-control-sm" type="text" placeholder="longitude" onChange={e => setLongitude(e.target.value)} />
         </div>
       );
     } else {
       return (
-        <div>
-          <TextInput placeholder="latitude" onChange={e => setLatitude(e.target.value)} />
-          <TextInput placeholder="longitude" onChange={e => setLongitude(e.target.value)} />
-          <View style={styling.subcontainer}>
-            <Text style={styling.subtext}>The Sun will set at {times.sunset.toUTCString()} for the given location!{"\n"}</Text>
-            <Text style={styling.subtext}>This will occur at {times.sunset.toLocaleTimeString()} in your time!{"\n"}</Text>
-            <Text style={styling.subtext}>
+        <div class="container-fluid bg-light text-secondary col-lg mt-auto p-3 mb-2">
+          <input placeholder="latitude" onChange={e => setLatitude(e.target.value)} />
+          <input placeholder="longitude" onChange={e => setLongitude(e.target.value)} />
+          <div class="mt-4">
+            <p class="lead">The Sun will set at {times.sunset.toUTCString()} for the given location!{"\n"}</p>
+            <p class="lead">This will occur at {times.sunset.toLocaleTimeString()} in your time!{"\n"}</p>
+            <p class="lead">
               {formatSunsetTimeDifference(timeDifference)}
-            </Text>
-          </View>
+            </p>
+          </div>
         </div>
       );
     }
   }
 
   return (
-    <View style={styling.container}>
-      <Text style={styling.header}>Remaining Sunlight Calculator</Text>
-      <Text style={styling.text}>The time is currently: {UtilDate().currentDate}</Text>
-      <Text style={styling.text}>Your local time is: {UtilDate().currentLocalDateTime}</Text>
-      <Text style={styling.text}>Please provide a location in decimal longitude and latitude below!</Text>
-      {LocationForm()}
-      {useCurrentLocation()}
-    </View>
+    <div class="bg-light">
+      <div class="container-fluid rounded-2 p-4">
+        <h1>Remaining Sunlight Calculator</h1>
+        <p class="lead">The time is currently: {UtilDate().currentDate}</p>
+        <p class="lead">Your local time is: {UtilDate().currentLocalDateTime}</p>
+        <p class="lead">Please provide a location in decimal longitude and latitude below!</p>
+      </div>
+      <div>
+        {LocationForm()}
+      </div>
+      <div>
+        {useCurrentLocation()}
+      </div>
+    </div>
   );
 
 }
-
-const styling = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'papayawhip',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  subcontainer: {
-    marginTop: 100,
-    flex: 2,
-    alignItems: 'center',
-    justifyContent: 'left',
-  },
-  text: {
-    marginTop: 3,
-    marginBottom: 11,
-    padding: 6,
-    fontFamily: 'Helvetica',
-    fontSize: 22,
-  },
-  subtext: {
-    fontFamily: 'Helvetica',
-    fontSize: 19,
-    padding: 20,
-  },
-  header: {
-    fontFamily: 'Helvetica',
-    fontSize: 55,
-    marginBottom: 40,
-    fontWeight: 'bold',
-  },
-  input: {
-    borderStyle: 'dashed',
-    borderColor: 'black'
-  }
-});
