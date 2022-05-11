@@ -68,7 +68,7 @@ export default function Droplet() {
 
     if (latitude === '' || longitude === '') {
       return (
-        <div class="container-fluid text-secondary col-lg mb-" style={{backgroundColor: '#F08700'}}>
+        <div class="container-fluid text-secondary col-lg mb-4" style={{backgroundColor: '#F08700'}}>
           <input style={{border: '0px solid rgba(0, 0, 0, 0.05)'}} class="form-control form-control-sm rounded-1 p-1 mb-3" type="text" placeholder="latitude" onChange={e => setLatitude(e.target.value)} />
           <input style={{border: '0px solid rgba(0, 0, 0, 0.05)'}} class="form-control form-control-sm rounded-1 p-1" type="text" placeholder="longitude" onChange={e => setLongitude(e.target.value)} />
         </div>
