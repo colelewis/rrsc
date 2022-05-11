@@ -90,7 +90,6 @@ export default function Droplet() {
     }
   }
 
-
   return (
     <View style={styling.container}>
       <Text style={styling.header}>Remaining Sunlight Calculator</Text>
