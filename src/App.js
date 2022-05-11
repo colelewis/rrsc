@@ -47,7 +47,6 @@ export default function Droplet() {
   const useCurrentLocation = () => {
     const geolocation = useGeolocation();
     var times = SunCalc.getTimes(new Date(), geolocation.latitude, geolocation.longitude);
-    console.log(times);
     var timeDifference = times.sunset.getTime() - UtilDate().timeInMs
     return (
       <View style={styling.subcontainer}>
